@@ -1,2 +1,10 @@
 server:
   port: 8081
+#  servlet:  only works for servlet container
+#    context-path: /plugin-manager
+
+spring:
+  profiles:
+    include: mongo
+  webflux:
+    base-path: /plugin-manager

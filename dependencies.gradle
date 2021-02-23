@@ -12,8 +12,8 @@ ext.libs = [
     //spring boot dependencies
     'spring-boot-starter-data-mongodb-reactive' : 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive',
     'spring-boot-starter-data-mongodb'          : 'org.springframework.boot:spring-boot-starter-data-mongodb',
-    'spring-boot-starter-data-redis-reactive'   : 'org.springframework.boot:spring-boot-starter-data-redis-reactive',
     'spring-boot-starter-data-redis'            : 'org.springframework.boot:spring-boot-starter-data-redis',
+    'spring-boot-starter-data-redis-reactive'   : 'org.springframework.boot:spring-boot-starter-data-redis-reactive',
     'spring-boot-starter-webflux'               : 'org.springframework.boot:spring-boot-starter-webflux',
     'spring-boot-starter-web'                   : 'org.springframework.boot:spring-boot-starter-web',
     'spring-boot-starter-batch'                 : 'org.springframework.boot:spring-boot-starter-batch',
@@ -64,4 +64,4 @@ ext.libs = [
 
 // upgrade mysql connector to the latest version since the dependency check tool complains
 // the origin version of mysql connector is too old
-ext['mysql.version'] = '8.0.23'
+//ext['mysql.version'] = '8.0.23'

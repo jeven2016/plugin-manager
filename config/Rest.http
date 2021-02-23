@@ -1,0 +1,15 @@
+POST http://localhost:8081/plugin-manager/plugin-groups
+Content-Type: application/json
+
+{
+  "name": "plugin-1",
+  "description": "a test plugin group"
+}
+
+###
+GET http://localhost:8081/plugin-manager/plugins/test
+Accept: application/json
+
+###
+
+
