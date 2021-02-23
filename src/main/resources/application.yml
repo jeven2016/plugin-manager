@@ -8,3 +8,5 @@ spring:
     include: mongo
   webflux:
     base-path: /plugin-manager
+  application:
+    name: plugin-manager

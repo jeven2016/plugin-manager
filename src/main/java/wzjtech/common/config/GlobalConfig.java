@@ -1,5 +1,6 @@
 package wzjtech.common.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import wzjtech.common.ExceptionHandler;
@@ -9,8 +10,8 @@ public class GlobalConfig {
 
 
   @Bean
-  public ExceptionHandler registerExceptionHandler() {
-    return new ExceptionHandler();
+  public ExceptionHandler registerExceptionHandler(ObjectMapper objectMapper) {
+    return new ExceptionHandler(objectMapper);
   }
 
 }
