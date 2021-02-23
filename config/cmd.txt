@@ -1,0 +1,16 @@
+show dbs
+
+use plugins
+
+
+show collections
+
+db.user.find()
+
+//maintain the goup collection
+db.plugin_group.find()
+db.plugin_group.drop()
+
+//check the group indexes
+db.plugin_group.getIndexes()
+db.plugin_group.totalIndexSize()
