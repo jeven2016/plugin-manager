@@ -1,8 +1,8 @@
 package wzjtech.repo;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import wzjtech.entity.PluginGroup;
+import wzjtech.document.PluginGroupDocument;
 
-public interface PluginGroupRepo extends ReactiveMongoRepository<PluginGroup, String> {
+public interface PluginGroupRepo extends ReactiveMongoRepository<PluginGroupDocument, String> {
 
 }

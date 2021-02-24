@@ -1,4 +1,4 @@
-package wzjtech.entity;
+package wzjtech.document;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

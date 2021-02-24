@@ -1,35 +1,27 @@
 package wzjtech.controller;
 
+import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import wzjtech.entity.User;
-import wzjtech.service.TestService;
+import wzjtech.document.PluginDocument;
+import wzjtech.service.PluginService;
 
 @RestController
-@RequestMapping("plugins")
 public class PluginController {
 
-  @GetMapping("list")
-  public Flux<String> listPlugins() {
-    return Flux.just("listPlugins");
-  }
-
-  @GetMapping("{id}")
-  public Mono<String> getPlugin() {
-    return Mono.just("getPlugin");
-  }
-
+  private final PluginService pluginService;
 
   @Autowired
-  TestService testService;
+  public PluginController(PluginService pluginService) {
+    this.pluginService = pluginService;
+  }
 
-  @GetMapping("test")
-  public Mono<User> test() {
-    return testService.get();
+  @PostMapping("/plugin-groups/{groupId}/plugins")
+  public Mono<UpdateResult> create(String groupid, @RequestBody PluginDocument plugin) {
+    return pluginService.save(groupid, plugin);
   }
 
 }

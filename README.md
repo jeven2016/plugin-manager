@@ -1,1 +1,1 @@
-# plugin-manager
+# pluginDocument-manager

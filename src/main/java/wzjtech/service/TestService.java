@@ -1,11 +1,10 @@
 package wzjtech.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.ReactiveMongoDatabaseUtils;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-import wzjtech.entity.User;
+import wzjtech.document.User;
 
 @Service
 public class TestService {

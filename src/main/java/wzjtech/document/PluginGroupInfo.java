@@ -1,4 +1,4 @@
-package wzjtech.entity;
+package wzjtech.document;
 
 import java.time.Instant;
 import lombok.Getter;
@@ -23,6 +23,8 @@ public class PluginGroupInfo {
   @Version
   private Long version;
 
+  // @CreatedDate will always be null if you didn't add
+  // the @Version to your model class. It works with @Version
   @CreatedDate
   private Instant createdDate;
 }

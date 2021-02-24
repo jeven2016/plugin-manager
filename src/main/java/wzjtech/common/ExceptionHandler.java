@@ -30,6 +30,7 @@ public class ExceptionHandler implements ErrorWebExceptionHandler {
       map.put("code", "DUPLICATED_ENTITY");
       map.put("description", "Duplicated entity");
     } else {
+      response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
       map.put("code", "INTERNAL_ERROR");
       map.put("description", "Unknown error");
 

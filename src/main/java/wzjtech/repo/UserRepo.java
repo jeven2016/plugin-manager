@@ -1,7 +1,7 @@
 package wzjtech.repo;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import wzjtech.entity.User;
+import wzjtech.document.User;
 
 //ReactiveMongoRepository
 //MongoRepository

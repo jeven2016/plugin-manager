@@ -1,4 +1,4 @@
-package wzjtech.entity;
+package wzjtech.document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +9,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "plugin_group")
 @Getter
 @Setter
-public class PluginGroup extends PluginGroupInfo {
+public class PluginGroupDocument extends PluginGroupInfo {
 
-  private List<Plugin> plugins = new ArrayList<>();
+  private List<PluginDocument> plugins = new ArrayList<>();
 
-  public static PluginGroup from(PluginGroupInfo groupInfo) {
-    var group = new PluginGroup();
+  public static PluginGroupDocument from(PluginGroupInfo groupInfo) {
+    var group = new PluginGroupDocument();
+    group.setId(groupInfo.getId());
     group.setName(groupInfo.getName());
     group.setDescription(groupInfo.getDescription());
-
+    group.setVersion(groupInfo.getVersion());
     return group;
   }
 
@@ -27,6 +28,7 @@ public class PluginGroup extends PluginGroupInfo {
     groupInfo.setName(getName());
     groupInfo.setDescription(getDescription());
     groupInfo.setCreatedDate(getCreatedDate());
+    groupInfo.setVersion(getVersion());
     return groupInfo;
   }
 }
