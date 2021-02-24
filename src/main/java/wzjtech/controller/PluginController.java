@@ -2,9 +2,8 @@ package wzjtech.controller;
 
 import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import wzjtech.document.PluginDocument;
 import wzjtech.service.PluginService;
@@ -20,8 +19,13 @@ public class PluginController {
   }
 
   @PostMapping("/plugin-groups/{groupId}/plugins")
-  public Mono<UpdateResult> create(String groupid, @RequestBody PluginDocument plugin) {
-    return pluginService.save(groupid, plugin);
+  @ResponseStatus(HttpStatus.CREATED)
+  public Mono<UpdateResult> create(@RequestBody PluginDocument plugin, @PathVariable String groupId) {
+    return pluginService.save(groupId, plugin);
   }
 
+  @GetMapping("/plugin-groups/test")
+  public Mono<String> test() {
+    return Mono.just("test");
+  }
 }

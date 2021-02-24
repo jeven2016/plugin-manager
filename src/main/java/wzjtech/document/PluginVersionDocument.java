@@ -1,15 +1,17 @@
 package wzjtech.document;
 
 import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 @Getter
 @Setter
 public class PluginVersionDocument {
 
-  @Version
+  @Indexed
   private String version;
 
   private Date date;

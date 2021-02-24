@@ -2,14 +2,7 @@ package wzjtech.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import wzjtech.document.PluginGroupDocument;
@@ -35,7 +28,7 @@ public class PluginGroupCtrl {
 
 
   @GetMapping("{id}")
-  public Mono<PluginGroupDocument> get(String id) {
+  public Mono<PluginGroupDocument> get(@PathVariable String id) {
     return groupService.findById(id);
   }
 
@@ -47,12 +40,12 @@ public class PluginGroupCtrl {
 
   @PutMapping("{id}")
   public Mono<PluginGroupInfo> update(@RequestBody PluginGroupInfo groupInfo, String id) {
-    return groupService.save(groupInfo).map(PluginGroupDocument::toGroupInfo);
+    return groupService.update(groupInfo).map(PluginGroupDocument::toGroupInfo);
   }
 
   @DeleteMapping("{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public Mono<Void> delete(String id) {
+  public Mono<Void> delete(@PathVariable String id) {
     return groupService.delete(id);
   }
 

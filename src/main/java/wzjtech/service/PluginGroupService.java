@@ -22,7 +22,7 @@ public class PluginGroupService {
   }
 
   public Mono<PluginGroupDocument> findById(String id) {
-    return repo.findById(id);
+    return repo.findById(id).switchIfEmpty(Mono.error(new DocumentNotFoundException("No document exists with id " + id)));
   }
 
   public Flux<PluginGroupInfo> findAll() {
@@ -45,7 +45,7 @@ public class PluginGroupService {
           groupDocument.setName(groupInfo.getName());
           groupDocument.setDescription(groupInfo.getDescription());
         })
-        .map(g -> repo.save(g));
+        .flatMap(repo::save);
   }
 
   public Mono<Void> delete(String groupId) {
