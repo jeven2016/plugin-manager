@@ -8,6 +8,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import wzjtech.common.config.PluginManagerException;
 
 import java.util.HashMap;
 
@@ -29,10 +30,14 @@ public class ExceptionHandler implements ErrorWebExceptionHandler {
       response.setStatusCode(HttpStatus.BAD_REQUEST);
       map.put("code", "DUPLICATED_ENTITY");
       map.put("description", "Duplicated entity");
+    } else if (ex instanceof PluginManagerException) {
+      response.setStatusCode(HttpStatus.BAD_REQUEST);
+      map.put("code", "INVALID_PARAM");
+      map.put("description", ex.getMessage());
     } else {
       response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
       map.put("code", "INTERNAL_ERROR");
-      map.put("description", "Unknown error");
+      map.put("description", ex.getMessage());
 
       log.warn("Unkown exception occurs", ex);
     }

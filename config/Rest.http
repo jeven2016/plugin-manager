@@ -5,12 +5,12 @@ Accept: application/json
 
 ## get a specific group document
 ###
-GET http://localhost:8081/plugin-manager/plugin-groups/60374d076aaf7f1ae552465b
+GET http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582
 Accept: application/json
 
 ## delete a specific group document
 ###
-DELETE http://localhost:8081/plugin-manager/plugin-groups/60374d076aaf7f1ae552465b
+DELETE http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582
 Accept: application/json
 
 ## create a group document
@@ -27,11 +27,11 @@ Content-Type: application/json
 
 ## update a group document
 ###
-PUT http://localhost:8081/plugin-manager/plugin-groups/60374d076aaf7f1ae552465b
+PUT http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582
 Content-Type: application/json
 
 {
-  "id": "60374d076aaf7f1ae552465b",
+  "id": "60376c69bd33d62d98b0e582",
   "name": "group1",
   "description": "updated group"
 }
@@ -46,7 +46,7 @@ Content-Type: application/json
 ###
 
 ## create a plugin
-POST http://localhost:8081/plugin-manager/plugin-groups/60374d076aaf7f1ae552465b/plugins
+POST http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582/plugins
 Content-Type: application/json
 
 {
@@ -59,12 +59,20 @@ Content-Type: application/json
 ###
 
 ## update a plugin
-PUT http://localhost:8081/plugin-manager/plugin-groups/60374d076aaf7f1ae552465b/plugins/plugin-1.1
+PUT http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582/plugins/plugin-1
 Content-Type: application/json
 
 {
-  "name": "plugin-2",
+  "name": "plugin-2.1",
   "description": "plugin updated",
   "provider": "WZJ Tech updated",
-  "projectUrl": "/localhost/plugin-2"
+  "projectUrl": "/localhost/plugin-2.1"
 }
+
+###
+
+## delete a plugin
+DELETE http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582/plugins/plugin-1
+Content-Type: application/json
+
+###

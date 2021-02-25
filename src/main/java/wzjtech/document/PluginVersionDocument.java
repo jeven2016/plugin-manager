@@ -1,5 +1,6 @@
 package wzjtech.document;
 
+import java.time.Instant;
 import java.util.Date;
 
 import lombok.Getter;
@@ -14,7 +15,7 @@ public class PluginVersionDocument {
   @Indexed
   private String version;
 
-  private Date date;
+  private Instant date;
 
   private String requires;
 
