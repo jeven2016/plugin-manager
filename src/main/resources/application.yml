@@ -10,3 +10,7 @@ spring:
     base-path: /plugin-manager
   application:
     name: plugin-manager
+
+logging:
+  level:
+    org.springframework.data.mongodb.core: debug
