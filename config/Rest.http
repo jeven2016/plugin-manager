@@ -5,12 +5,12 @@ Accept: application/json
 
 ## get a specific group document
 ###
-GET http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582
+GET http://localhost:8081/plugin-manager/plugin-groups/6038ad1da67af33adf92675a
 Accept: application/json
 
 ## delete a specific group document
 ###
-DELETE http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582
+DELETE http://localhost:8081/plugin-manager/plugin-groups/6038ad1da67af33adf92675a
 Accept: application/json
 
 ## create a group document
@@ -27,11 +27,11 @@ Content-Type: application/json
 
 ## update a group document
 ###
-PUT http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582
+PUT http://localhost:8081/plugin-manager/plugin-groups/6038ad1da67af33adf92675a
 Content-Type: application/json
 
 {
-  "id": "60376c69bd33d62d98b0e582",
+  "id": "6038ad1da67af33adf92675a",
   "name": "group1",
   "description": "updated group"
 }
@@ -46,7 +46,7 @@ Content-Type: application/json
 ###
 
 ## create a plugin
-POST http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582/plugins
+POST http://localhost:8081/plugin-manager/plugin-groups/6038ad1da67af33adf92675a/plugins
 Content-Type: application/json
 
 {
@@ -59,11 +59,11 @@ Content-Type: application/json
 ###
 
 ## update a plugin
-PUT http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582/plugins/plugin-1
+PUT http://localhost:8081/plugin-manager/plugin-groups/6038ad1da67af33adf92675a/plugins/plugin-1
 Content-Type: application/json
 
 {
-  "name": "plugin-2.1",
+  "name": "plugin-2",
   "description": "plugin updated",
   "provider": "WZJ Tech updated",
   "projectUrl": "/localhost/plugin-2.1"
@@ -72,7 +72,21 @@ Content-Type: application/json
 ###
 
 ## delete a plugin
-DELETE http://localhost:8081/plugin-manager/plugin-groups/60376c69bd33d62d98b0e582/plugins/plugin-1
+DELETE http://localhost:8081/plugin-manager/plugin-groups/6038ad1da67af33adf92675a/plugins/plugin-2
 Content-Type: application/json
+
+###
+
+## create a plugin version
+POST http://localhost:8081/plugin-manager/plugin-groups/6038ad1da67af33adf92675a/plugins/plugin-1/versions
+Content-Type: application/json
+
+{
+  "version": "0.1.0",
+  "date": "2019-08-14T12:17:47Z",
+  "requires": null,
+  "url": "/version-0.1.0",
+  "sha512sum": null
+}
 
 ###

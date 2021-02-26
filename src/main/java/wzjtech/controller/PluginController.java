@@ -3,10 +3,17 @@ package wzjtech.controller;
 import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import wzjtech.document.PluginDocument;
-import wzjtech.document.PluginGroupDocument;
+import wzjtech.document.PluginVersionDocument;
 import wzjtech.service.PluginService;
 
 @RestController
@@ -23,20 +30,27 @@ public class PluginController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Mono<UpdateResult> create(@RequestBody PluginDocument plugin,
-                                   @PathVariable String groupId) {
+      @PathVariable String groupId) {
     return pluginService.save(groupId, plugin);
   }
 
   @PutMapping("{pluginName}")
   public Mono<UpdateResult> update(@RequestBody PluginDocument plugin, @PathVariable String groupId,
-                                   @PathVariable String pluginName) {
+      @PathVariable String pluginName) {
     return pluginService.update(groupId, pluginName, plugin);
   }
 
 
   @DeleteMapping("{pluginName}")
-  public Mono<PluginGroupDocument> delete(@PathVariable String groupId,
-                                          @PathVariable String pluginName) {
+  public Mono<UpdateResult> delete(@PathVariable String groupId,
+      @PathVariable String pluginName) {
     return pluginService.delete(groupId, pluginName);
+  }
+
+  @PostMapping("{pluginName}/versions")
+  @ResponseStatus(HttpStatus.CREATED)
+  public Mono<UpdateResult> createVersion(@PathVariable String groupId,
+      @PathVariable String pluginName, @RequestBody PluginVersionDocument version) {
+    return pluginService.saveVersion(groupId, pluginName, version);
   }
 }

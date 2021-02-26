@@ -10,6 +10,11 @@ spring:
     base-path: /plugin-manager
   application:
     name: plugin-manager
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+#    time-zone: Asian/Shanghai
+#    serialization:
+#      write-dates-as-timestamps: true #to produce the UTC time string: "2021-08-14T12:17:47.720Z"
 
 logging:
   level:

@@ -1,5 +1,8 @@
 package wzjtech.service;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +14,7 @@ import reactor.core.publisher.Mono;
 import wzjtech.common.config.PluginManagerException;
 import wzjtech.document.PluginDocument;
 import wzjtech.document.PluginGroupDocument;
-
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
+import wzjtech.document.PluginVersionDocument;
 
 @Service
 public class PluginService {
@@ -28,7 +29,7 @@ public class PluginService {
   /**
    * Save or update a plugin
    *
-   * @param groupId        plugin group id
+   * @param groupId plugin group id
    * @param pluginDocument plugin doc
    * @return Mono<UpdateResult>
    */
@@ -41,12 +42,12 @@ public class PluginService {
   /**
    * Update a plugin itself
    *
-   * @param groupId        plugin group id
+   * @param groupId plugin group id
    * @param pluginDocument plugin document
    * @return result
    */
   public Mono<UpdateResult> update(String groupId, String pluginName,
-                                   PluginDocument pluginDocument) {
+      PluginDocument pluginDocument) {
     var update = new Update()
         .set("plugins.$.name", pluginDocument.getName())
         .set("plugins.$.description", pluginDocument.getDescription())
@@ -68,11 +69,11 @@ public class PluginService {
   /**
    * Delete a plugin and releases
    *
-   * @param groupId    group id
+   * @param groupId group id
    * @param pluginName plugin name
    * @return Mono<DeleteResult>
    */
-  public Mono<PluginGroupDocument> delete(String groupId, String pluginName) {
+  public Mono<UpdateResult> delete(String groupId, String pluginName) {
     var query = createQuery(groupId, pluginName);
     var update = new Update().pull("plugins", new BasicDBObject("name", pluginName));
 
@@ -80,9 +81,17 @@ public class PluginService {
       if (!exists) {
         return Mono.error(pluginNotFound(pluginName));
       } else {
-        return template.findAndModify(query, update, PluginGroupDocument.class);
+        return template.updateFirst(query, update, PluginGroupDocument.class);
       }
     });
+  }
+
+  public Mono<UpdateResult> saveVersion(String groupId, String pluginName,
+      PluginVersionDocument version) {
+    var query = createQuery(groupId, pluginName);
+    var update = new Update().addToSet("plugins.$.pluginVersions", version);
+
+    return template.updateFirst(query, update, PluginGroupDocument.class);
   }
 
   private Query createQuery(String groupId, String pluginName) {
@@ -92,7 +101,8 @@ public class PluginService {
   }
 
   private PluginManagerException pluginNotFound(String pluginName) {
-    return new PluginManagerException.DocumentNotFoundException("Plugin " + pluginName + " not found");
+    return new PluginManagerException.DocumentNotFoundException(
+        "Plugin " + pluginName + " not found");
   }
 
 }

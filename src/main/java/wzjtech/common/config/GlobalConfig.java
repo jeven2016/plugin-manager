@@ -1,6 +1,7 @@
 package wzjtech.common.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -15,5 +16,4 @@ public class GlobalConfig {
   public ExceptionHandler registerExceptionHandler(ObjectMapper objectMapper) {
     return new ExceptionHandler(objectMapper);
   }
-
 }
