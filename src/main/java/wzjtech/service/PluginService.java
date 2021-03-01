@@ -113,7 +113,7 @@ public class PluginService {
     var query = createQuery(groupId, pluginName);
 
     var update = new Update()
-        .pull("plugins.$.pluginVersions", new BasicDBObject("version", version));
+        .pull("plugins.pluginVersions", new BasicDBObject("version", version));
     return template.updateFirst(query, update, PluginGroupDocument.class);
   }
 
