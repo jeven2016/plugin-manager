@@ -14,3 +14,19 @@ db.plugin_group.drop()
 //check the group indexes
 db.plugin_group.getIndexes()
 db.plugin_group.totalIndexSize()
+
+
+db.plugin_group.updateOne(
+		{"_id": ObjectId("603c554353fef078c1691e69")},
+		{
+			$pull:{
+				"plugins.$[t].pluginVersions":{$elemMatch: {version: "0.1.0"}}
+			}
+		},
+		{
+			arrayFilters:[{
+				"t.name":"plugin-1",
+			}],
+		})
+
+
