@@ -105,4 +105,39 @@ public class PluginService {
         "Plugin " + pluginName + " not found");
   }
 
+
+  /**
+   * {plugins: [ {pluginVersions: [version: '0.1.']}]}
+   */
+  public Mono<UpdateResult> deleteVersion(String groupId, String pluginName, String version) {
+    var query = createQuery(groupId, pluginName);
+
+    var update = new Update()
+        .pull("plugins.$.pluginVersions", new BasicDBObject("version", version));
+    return template.updateFirst(query, update, PluginGroupDocument.class);
+  }
+
+  /**
+   * {plugins: [ {pluginVersions: [version: '0.1.']}]}
+   */
+  public Mono<UpdateResult> deleteVersion3(String groupId, String pluginName, String version) {
+    var qry = query(where("id").is(groupId))
+        .addCriteria(where("plugins").elemMatch(where("name").is(pluginName)
+            .and("pluginVersions").elemMatch(where("version").is(version))));
+
+    var update = new Update()
+        .pull("plugins.$.pluginVersions", qry);
+    return template.updateFirst(qry, update, PluginGroupDocument.class);
+  }
+
+  /**
+   * {plugins: [ {pluginVersions: [version: '0.1.']}]}
+   */
+  public Mono<UpdateResult> deleteVersion2(String groupId, String pluginName, String version) {
+    var qry = createQuery(groupId, pluginName);//find group
+
+    var update = new Update()
+        .pull("plugins.$.pluginVersions", where("version").is("0.1.0"));
+    return template.updateFirst(qry, update, PluginGroupDocument.class);
+  }
 }

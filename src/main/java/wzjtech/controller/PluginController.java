@@ -53,4 +53,11 @@ public class PluginController {
       @PathVariable String pluginName, @RequestBody PluginVersionDocument version) {
     return pluginService.saveVersion(groupId, pluginName, version);
   }
+
+  @DeleteMapping("{pluginName}/versions/{version}")
+  @ResponseStatus(HttpStatus.CREATED)
+  public Mono<UpdateResult> deleteVersion(@PathVariable String groupId,
+      @PathVariable String pluginName, @PathVariable String version) {
+    return pluginService.deleteVersion(groupId, pluginName, version);
+  }
 }
