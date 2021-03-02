@@ -1,14 +1,15 @@
 package wzjtech.document;
 
+import java.time.Instant;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
-
-import java.time.Instant;
 
 @Getter
 @Setter
@@ -24,6 +25,7 @@ public class PluginGroupInfo {
   @Indexed(unique = true)
   private String name;
 
+  @TextIndexed
   private String description;
 
   @Version

@@ -19,8 +19,8 @@ POST http://localhost:8081/plugin-manager/plugin-groups
 Content-Type: application/json
 
 {
-  "name": "group1",
-  "description": "a test pluginDocument group"
+  "name": "group2",
+  "description": "a test pluginDocument group4"
 }
 
 ###

@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 
 @Getter
 @Setter

@@ -30,6 +30,7 @@ public class ExceptionHandler implements ErrorWebExceptionHandler {
       response.setStatusCode(HttpStatus.BAD_REQUEST);
       map.put("code", "DUPLICATED_ENTITY");
       map.put("description", "Duplicated entity");
+      log.warn("DuplicateKeyException", ex);
     } else if (ex instanceof PluginManagerException) {
       response.setStatusCode(HttpStatus.BAD_REQUEST);
       map.put("code", "INVALID_PARAM");
@@ -39,7 +40,7 @@ public class ExceptionHandler implements ErrorWebExceptionHandler {
       map.put("code", "INTERNAL_ERROR");
       map.put("description", ex.getMessage());
 
-      log.warn("Unkown exception occurs", ex);
+      log.warn("Unknown exception occurs", ex);
     }
     var mono = Mono.just(map).map(m -> {
       try {
