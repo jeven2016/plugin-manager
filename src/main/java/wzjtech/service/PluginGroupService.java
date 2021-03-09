@@ -22,29 +22,36 @@ public class PluginGroupService {
   }
 
   public Mono<PluginGroupDocument> findById(String id) {
-    return repo.findById(id).switchIfEmpty(Mono.error(new DocumentNotFoundException("No document exists with id " + id)));
+    return repo.findById(id)
+        .switchIfEmpty(
+            Mono.error(new DocumentNotFoundException("No document exists with id " + id)));
   }
 
   public Flux<PluginGroupInfo> findAll() {
-    return repo.findAll().map(PluginGroupDocument::toGroupInfo);
+    return repo.findPureGroups().map(PluginGroupDocument::toGroupInfo);
   }
 
   public Mono<PluginGroupDocument> save(PluginGroupInfo groupInfo) {
     return repo.save(PluginGroupDocument.from(groupInfo));
   }
 
+  /**
+   * Only update the group itself
+   *
+   * @param groupInfo PluginGroupInfo
+   * @return Mono<PluginGroupDocument>
+   */
   public Mono<PluginGroupDocument> update(PluginGroupInfo groupInfo) {
     if (StringUtils.isNullOrEmpty(groupInfo.getId())) {
       return Mono.error(new PluginManagerException("The id is required to update"));
     }
-    return repo.findById(groupInfo.getId())
-        .switchIfEmpty(Mono.error(
-            new DocumentNotFoundException("No document exists with id" + groupInfo.getId())))
-        .doOnNext(groupDocument -> {
-          groupDocument.setId(groupInfo.getId());
-          groupDocument.setName(groupInfo.getName());
-          groupDocument.setDescription(groupInfo.getDescription());
-        })
+    return findById(groupInfo.getId())
+        .doOnNext(
+            groupDocument -> {
+              groupDocument.setId(groupInfo.getId());
+              groupDocument.setName(groupInfo.getName());
+              groupDocument.setDescription(groupInfo.getDescription());
+            })
         .flatMap(repo::save);
   }
 

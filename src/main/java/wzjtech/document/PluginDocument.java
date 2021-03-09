@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.index.TextIndexed;
 @Setter
 public class PluginDocument {
 
-  @Indexed
+  @Indexed(unique = true)
   public String name;
 
   public String description;
