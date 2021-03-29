@@ -27,7 +27,7 @@ public class ExceptionHandler implements ErrorWebExceptionHandler {
 
     var map = new HashMap<String, String>();
     if (ex instanceof DuplicateKeyException) {
-      response.setStatusCode(HttpStatus.BAD_REQUEST);
+      response.setStatusCode(HttpStatus.CONFLICT);
       map.put("code", "DUPLICATED_ENTITY");
       map.put("description", "Duplicated entity");
       log.warn("DuplicateKeyException", ex);

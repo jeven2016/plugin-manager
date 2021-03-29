@@ -7,32 +7,32 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import wzjtech.common.config.PluginManagerException;
 import wzjtech.common.config.PluginManagerException.DocumentNotFoundException;
-import wzjtech.document.PluginGroupDocument;
-import wzjtech.document.PluginGroupInfo;
-import wzjtech.repo.PluginGroupRepo;
+import wzjtech.document.CatalogDocument;
+import wzjtech.document.CatalogInfo;
+import wzjtech.repo.CatalogRepo;
 
 @Service
 public class PluginGroupService {
 
-  private final PluginGroupRepo repo;
+  private final CatalogRepo repo;
 
   @Autowired
-  public PluginGroupService(PluginGroupRepo repo) {
+  public PluginGroupService(CatalogRepo repo) {
     this.repo = repo;
   }
 
-  public Mono<PluginGroupDocument> findById(String id) {
+  public Mono<CatalogDocument> findById(String id) {
     return repo.findById(id)
         .switchIfEmpty(
             Mono.error(new DocumentNotFoundException("No document exists with id " + id)));
   }
 
-  public Flux<PluginGroupInfo> findAll() {
-    return repo.findPureGroups().map(PluginGroupDocument::toGroupInfo);
+  public Flux<CatalogInfo> findAll() {
+    return repo.findPureGroups().map(CatalogDocument::toGroupInfo);
   }
 
-  public Mono<PluginGroupDocument> save(PluginGroupInfo groupInfo) {
-    return repo.save(PluginGroupDocument.from(groupInfo));
+  public Mono<CatalogDocument> save(CatalogInfo groupInfo) {
+    return repo.save(CatalogDocument.from(groupInfo));
   }
 
   /**
@@ -41,7 +41,7 @@ public class PluginGroupService {
    * @param groupInfo PluginGroupInfo
    * @return Mono<PluginGroupDocument>
    */
-  public Mono<PluginGroupDocument> update(PluginGroupInfo groupInfo) {
+  public Mono<CatalogDocument> update(CatalogInfo groupInfo) {
     if (StringUtils.isNullOrEmpty(groupInfo.getId())) {
       return Mono.error(new PluginManagerException("The id is required to update"));
     }
@@ -50,6 +50,7 @@ public class PluginGroupService {
             groupDocument -> {
               groupDocument.setId(groupInfo.getId());
               groupDocument.setName(groupInfo.getName());
+              groupDocument.setEnablePlugin(groupInfo.getEnablePlugin());
               groupDocument.setDescription(groupInfo.getDescription());
             })
         .flatMap(repo::save);

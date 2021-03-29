@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 @Setter
 public class PluginVersionDocument {
 
-  @Indexed(unique = true)
   private String version;
 
   //  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")

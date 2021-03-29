@@ -17,7 +17,7 @@ import wzjtech.document.PluginVersionDocument;
 import wzjtech.service.PluginService;
 
 @RestController
-@RequestMapping("/plugin-groups/{groupId}/plugins")
+@RequestMapping("/catalogs/{groupId}/plugins")
 public class PluginController {
 
   private final PluginService pluginService;

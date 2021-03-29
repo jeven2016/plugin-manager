@@ -1,21 +1,21 @@
 
 ## query all group info objects
-GET http://localhost:8081/plugin-manager/plugin-groups
+GET http://localhost:8081/plugin-manager/catalogs
 Accept: application/json
 
 ## get a specific group document
 ###
-GET http://localhost:8081/plugin-manager/plugin-groups/604743c09ead6971cb92670a
+GET http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a
 Accept: application/json
 
 ## delete a specific group document
 ###
-DELETE http://localhost:8081/plugin-manager/plugin-groups/604743c09ead6971cb92670a
+DELETE http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a
 Accept: application/json
 
 ## create a group document
 ###
-POST http://localhost:8081/plugin-manager/plugin-groups
+POST http://localhost:8081/plugin-manager/catalogs
 Content-Type: application/json
 
 {
@@ -27,7 +27,7 @@ Content-Type: application/json
 
 ## update a group document
 ###
-PUT http://localhost:8081/plugin-manager/plugin-groups/604743c09ead6971cb92670a
+PUT http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a
 Content-Type: application/json
 
 {
@@ -40,13 +40,13 @@ Content-Type: application/json
 
 ## delete all group documents
 ###
-DELETE http://localhost:8081/plugin-manager/plugin-groups
+DELETE http://localhost:8081/plugin-manager/catalogs
 Content-Type: application/json
 
 ###
 
 ## create a plugin
-POST http://localhost:8081/plugin-manager/plugin-groups/604743c09ead6971cb92670a/plugins
+POST http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins
 Content-Type: application/json
 
 {
@@ -59,7 +59,7 @@ Content-Type: application/json
 ###
 
 ## update a plugin
-PUT http://localhost:8081/plugin-manager/plugin-groups/604743c09ead6971cb92670a/plugins/plugin-1
+PUT http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins/plugin-1
 Content-Type: application/json
 
 {
@@ -72,13 +72,13 @@ Content-Type: application/json
 ###
 
 ## delete a plugin
-DELETE http://localhost:8081/plugin-manager/plugin-groups/604743c09ead6971cb92670a/plugins/plugin-2
+DELETE http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins/plugin-2
 Content-Type: application/json
 
 ###
 
 ## create a plugin version
-POST http://localhost:8081/plugin-manager/plugin-groups/604743c09ead6971cb92670a/plugins/plugin-1/versions
+POST http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins/plugin-1/versions
 Content-Type: application/json
 
 {
@@ -92,7 +92,7 @@ Content-Type: application/json
 ###
 
 ## delete a plugin version
-DELETE http://localhost:8081/plugin-manager/plugin-groups/604743c09ead6971cb92670a/plugins/plugin-1/versions/0.1.0
+DELETE http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins/plugin-1/versions/0.1.0
 Content-Type: application/json
 
 

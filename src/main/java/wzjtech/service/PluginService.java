@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import wzjtech.common.config.PluginManagerException;
 import wzjtech.document.PluginDocument;
-import wzjtech.document.PluginGroupDocument;
+import wzjtech.document.CatalogDocument;
 import wzjtech.document.PluginVersionDocument;
 
 @Service
@@ -36,7 +36,7 @@ public class PluginService {
   public Mono<UpdateResult> save(String groupId, PluginDocument pluginDocument) {
     var update = new Update().addToSet("plugins", pluginDocument);
     var criteria = where("id").is(groupId);
-    return template.updateFirst(query(criteria), update, PluginGroupDocument.class);
+    return template.updateFirst(query(criteria), update, CatalogDocument.class);
   }
 
   /**
@@ -57,11 +57,11 @@ public class PluginService {
     //find the group by groupId and update the element in plugins list by plugin name
     var query = createQuery(groupId, pluginName);
 
-    return template.exists(query, PluginGroupDocument.class).flatMap(exists -> {
+    return template.exists(query, CatalogDocument.class).flatMap(exists -> {
       if (!exists) {
         return Mono.error(pluginNotFound(pluginName));
       } else {
-        return template.updateFirst(query, update, PluginGroupDocument.class);
+        return template.updateFirst(query, update, CatalogDocument.class);
       }
     });
   }
@@ -77,11 +77,11 @@ public class PluginService {
     var query = createQuery(groupId, pluginName);
     var update = new Update().pull("plugins", new BasicDBObject("name", pluginName));
 
-    return template.exists(query, PluginGroupDocument.class).flatMap(exists -> {
+    return template.exists(query, CatalogDocument.class).flatMap(exists -> {
       if (!exists) {
         return Mono.error(pluginNotFound(pluginName));
       } else {
-        return template.updateFirst(query, update, PluginGroupDocument.class);
+        return template.updateFirst(query, update, CatalogDocument.class);
       }
     });
   }
@@ -91,7 +91,7 @@ public class PluginService {
     var query = createQuery(groupId, pluginName);
     var update = new Update().addToSet("plugins.$.pluginVersions", version);
 
-    return template.updateFirst(query, update, PluginGroupDocument.class);
+    return template.updateFirst(query, update, CatalogDocument.class);
   }
 
   private Query createQuery(String groupId, String pluginName) {
@@ -114,7 +114,7 @@ public class PluginService {
 
     var update = new Update()
         .pull("plugins.pluginVersions", new BasicDBObject("version", version));
-    return template.updateFirst(query, update, PluginGroupDocument.class);
+    return template.updateFirst(query, update, CatalogDocument.class);
   }
 
   /**
@@ -127,7 +127,7 @@ public class PluginService {
 
     var update = new Update()
         .pull("plugins.$.pluginVersions", qry);
-    return template.updateFirst(qry, update, PluginGroupDocument.class);
+    return template.updateFirst(qry, update, CatalogDocument.class);
   }
 
   /**
@@ -138,6 +138,6 @@ public class PluginService {
 
     var update = new Update()
         .pull("plugins.$.pluginVersions", where("version").is("0.1.0"));
-    return template.updateFirst(qry, update, PluginGroupDocument.class);
+    return template.updateFirst(qry, update, CatalogDocument.class);
   }
 }

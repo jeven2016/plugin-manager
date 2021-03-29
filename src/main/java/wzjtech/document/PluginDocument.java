@@ -12,7 +12,8 @@ import org.springframework.data.mongodb.core.index.TextIndexed;
 @Setter
 public class PluginDocument {
 
-  @Indexed(unique = true)
+  //当plugin不存在时，会报duplicate key的错, 添加sparse
+  @Indexed(unique = true, sparse = true)
   public String name;
 
   public String description;
