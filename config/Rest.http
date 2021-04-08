@@ -5,12 +5,17 @@ Accept: application/json
 
 ## get a specific group document
 ###
-GET http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a
+GET http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7
+Accept: application/json
+
+## get a list of plugins
+###
+GET http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7/plugins
 Accept: application/json
 
 ## delete a specific group document
 ###
-DELETE http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a
+DELETE http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7
 Accept: application/json
 
 ## create a group document
@@ -27,11 +32,11 @@ Content-Type: application/json
 
 ## update a group document
 ###
-PUT http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a
+PUT http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7
 Content-Type: application/json
 
 {
-  "id": "604743c09ead6971cb92670a",
+  "id": "6065775dc8878b23d27384d7",
   "name": "group1",
   "description": "updated group"
 }
@@ -46,11 +51,12 @@ Content-Type: application/json
 ###
 
 ## create a plugin
-POST http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins
+POST http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7/plugins
 Content-Type: application/json
 
 {
-  "name": "plugin-1",
+  "name": "plugin-2",
+  "enabled": true,
   "description": "plugin desc",
   "provider": "WZJ Tech",
   "projectUrl": "/localhost/plugin-1"
@@ -58,8 +64,14 @@ Content-Type: application/json
 
 ###
 
+## fetch a plugin
+GET http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7/plugins/plugin-1
+Content-Type: application/json
+
+###
+
 ## update a plugin
-PUT http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins/plugin-1
+PUT http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7/plugins/plugin-1
 Content-Type: application/json
 
 {
@@ -72,17 +84,17 @@ Content-Type: application/json
 ###
 
 ## delete a plugin
-DELETE http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins/plugin-2
+DELETE http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7/plugins/plugin-2
 Content-Type: application/json
 
 ###
 
 ## create a plugin version
-POST http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins/plugin-1/versions
+POST http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7/plugins/plugin-1/versions
 Content-Type: application/json
 
 {
-  "version": "1.1.1",
+  "version": "1.1.4",
   "date": "2120-08-14T12:17:47Z",
   "requires": null,
   "url": "/version-1.1.0",
@@ -92,7 +104,7 @@ Content-Type: application/json
 ###
 
 ## delete a plugin version
-DELETE http://localhost:8081/plugin-manager/catalogs/604743c09ead6971cb92670a/plugins/plugin-1/versions/0.1.0
+DELETE http://localhost:8081/plugin-manager/catalogs/6065775dc8878b23d27384d7/plugins/plugin-1/versions/0.1.0
 Content-Type: application/json
 
 

@@ -12,15 +12,16 @@ import wzjtech.document.CatalogInfo;
 import wzjtech.service.PluginGroupService;
 
 import java.beans.PropertyEditorSupport;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("catalogs")
-public class PluginGroupCtrl {
+public class PluginCatalogCtrl {
 
   private final PluginGroupService groupService;
 
   @Autowired
-  public PluginGroupCtrl(PluginGroupService groupService) {
+  public PluginCatalogCtrl(PluginGroupService groupService) {
     this.groupService = groupService;
   }
 
@@ -59,5 +60,4 @@ public class PluginGroupCtrl {
   public Mono<Void> deleteAll(String id) {
     return groupService.deleteAll();
   }
-
 }

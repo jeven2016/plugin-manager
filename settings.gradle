@@ -1,2 +1,21 @@
-rootProject.name = 'plugin-manager'
+pluginManagement {
+    repositories {
+        maven {
+            //then try to retrieve jars from private repository
+            url nexusPublicUrl
+        }
 
+        /**
+         * It turns out that the mavenLocal() repository is not the Gradle dependency cache.
+         * It is a repository where you can deploy components
+         * with ./gradlew publishToMavenLocal (assuming you use the maven-publish Gradle plugin ).
+         * Now, why would you like to deploy to a local repository? My take is, you don’t.
+         */
+//        mavenLocal()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://repo.spring.io/release' }
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'plugin-manager'

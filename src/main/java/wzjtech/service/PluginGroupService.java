@@ -2,6 +2,9 @@ package wzjtech.service;
 
 import org.pf4j.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -11,14 +14,20 @@ import wzjtech.document.CatalogDocument;
 import wzjtech.document.CatalogInfo;
 import wzjtech.repo.CatalogRepo;
 
+import java.util.HashMap;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
+
 @Service
 public class PluginGroupService {
 
   private final CatalogRepo repo;
+  private final ReactiveMongoTemplate template;
 
   @Autowired
-  public PluginGroupService(CatalogRepo repo) {
+  public PluginGroupService(CatalogRepo repo, ReactiveMongoTemplate template) {
     this.repo = repo;
+    this.template = template;
   }
 
   public Mono<CatalogDocument> findById(String id) {
@@ -34,6 +43,7 @@ public class PluginGroupService {
   public Mono<CatalogDocument> save(CatalogInfo groupInfo) {
     return repo.save(CatalogDocument.from(groupInfo));
   }
+
 
   /**
    * Only update the group itself

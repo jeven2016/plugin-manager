@@ -1,7 +1,10 @@
+import org.springframework.aot.gradle.dsl.AotMode
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.4.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.experimental.aot' version '0.9.1'
 }
 
 apply from: 'dependencies.gradle'
@@ -51,4 +54,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+//spring native build
+bootBuildImage {
+    builder = 'paketobuildpacks/builder:tiny'
+    environment = ['BP_NATIVE_IMAGE': 'true']
 }
